@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+
+<head>
+    <!-- Global Headers -->
+    <%- include('../partials/globalHeaders.ejs') %>
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="<%- NGINX_TAG %>/css/partials/global.css">
+
+    <!-- JS personalizado -->
+    <script src="<%- NGINX_TAG %>/js/usuarios/tableroUsuariosActivados.js"></script>
+
+    <!-- Let the script use the data -->
+    <script>
+        const dataUsuarios = <%- JSON.stringify(dataUsuarios) %>;
+    </script>
+
+</head>
+
+<body class="bg-gray-50 min-h-full">
+    <!-- Navigation Bar -->
+    <%- include('../partials/navbar.ejs') %>
+
+    <!-- Side Bar -->
+    <%- include('../partials/sidebar.ejs') %>
+
+    <div class="pt-[5.5rem]">
+        <div class="container mx-auto px-4 py-8" x-data="usersModule()">
+            <div>
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                    <!-- 
+                    <button @click="addUser()"
+                        class="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 shadow-sm">
+                        <svg class="w-6 h-6 mb-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
+                            </path>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">Añadir Usuario</span>
+                    </button>
+
+                    <button @click="restoreUsersView()"
+                        class="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-green-500 hover:bg-green-50 transition-all duration-200 shadow-sm">
+                        <svg class="w-6 h-6 mb-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 7v10c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4V7M4 7c0-2.21 1.79-4 4-4h8c2.21 0 4 1.79 4 4M4 7h16m-4-4v4m-8-4v4">
+                            </path>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">Restaurar Usuario</span>
+                    </button>
+
+                    <button @click="configureTeamView()"
+                        class="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all duration-200 shadow-sm">
+                        <svg class="w-6 h-6 mb-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">Configurar Equipo</span>
+                    </button>
+                    -->
+
+                    <button @click="downloadPDF()"
+                        class="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-red-500 hover:bg-red-50 transition-all duration-200 shadow-sm">
+                        <svg class="w-6 h-6 mb-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">Descargar PDF</span>
+                    </button>
+
+                    <button @click="downloadExcel()"
+                        class="flex flex-col items-center justify-center p-4 bg-white border-2 border-gray-200 rounded-lg hover:border-yellow-500 hover:bg-yellow-50 transition-all duration-200 shadow-sm">
+                        <svg class="w-6 h-6 mb-2 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">Descargar Excel</span>
+                    </button>
+                </div>
+
+                
+
+                <!-- Loading indicator -->
+                <template x-if="isLoading">
+                    <div class="text-center py-12">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
+                            <svg class="w-8 h-8 text-blue-600 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">Cargando usuarios...</h2>
+                    </div>
+                </template>
+
+                <!-- Search Input -->
+                <template x-if="!isLoading && usersRows.length > 0">
+                    <div class="mb-6">
+                        <div class="relative">
+                            <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                            <input x-model="searchQuery" @input="filterTable()" type="text"
+                                placeholder="Buscar por nombre, apellido o área"
+                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Tabulator Table -->
+            <template x-if="!isLoading && usersRows.length > 0">
+                <div>
+                    <div id="users-table" class="bg-white rounded-lg shadow-md overflow-hidden mb-6"></div>
+
+                    <!-- Pagination
+                    <div class="flex justify-between items-center mt-6">
+                        <div class="text-sm text-gray-700">
+                            Mostrando <span x-text="table ? dataUsuarios.length : <%= dataUsuarios.length %>"><%= dataUsuarios.length %></span> usuarios
+                        </div>
+
+                        <div class="flex space-x-2">
+                            <button @click="table && table.previousPage()"
+                                class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                Anterior
+                            </button>
+                            <button @click="table && table.nextPage()"
+                                class="px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                Siguiente
+                            </button>
+                        </div>
+                    </div>
+                     -->
+                </div>
+            </template>
+
+            <!-- No Users Message -->
+            <template x-if="!isLoading && usersRows.length === 0">
+                <div class="text-center py-12">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-800">El sistema no cuenta con usuarios.</h2>
+                    <p class="text-gray-600">Empieza creando un nuevo usuario.</p>
+                </div>
+            </template>
+
+            <!-- Error Message -->
+            <template x-if="!isLoading && hasError">
+                <div class="text-center py-12">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Error al cargar usuarios</h2>
+                    <p class="text-gray-600 mb-4">No se pudieron cargar los datos de usuarios.</p>
+                    <button @click="loadUsersData()" 
+                        class="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700">
+                        Reintentar
+                    </button>
+                </div>
+            </template>
+        </div>
+    </div>
+</body>
+
+</html>

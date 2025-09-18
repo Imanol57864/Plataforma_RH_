@@ -1,0 +1,70 @@
+<!---------->
+<!-- HEAD -->
+<!---------->
+
+<!-- CSS de FilePond -->
+<link href="<%- NGINX_TAG %>/css/partials/filepond.css" rel="stylesheet">
+<link href="<%- NGINX_TAG %>/css/partials/filepond.imagepreview.css" rel="stylesheet">
+
+<!-- JS de FilePond y plugins -->
+<script src="<%- NGINX_TAG %>/js/scripts/filepond.js"></script>
+<script src="<%- NGINX_TAG %>/js/scripts/filepond.imagepreview.js"></script>
+<script src="<%- NGINX_TAG %>/js/scripts/filepond.validatesize.js"></script>
+<script src="<%- NGINX_TAG %>/js/scripts/filepond.validatetype.js"></script>
+
+<style>
+    .filepond--credits {
+        display: none !important;
+    }
+
+    .filepond--root {
+        margin-bottom: 0 !important;
+    }
+
+    /* Ajuste de estilo para el botón Ver */
+    .filepond--file-action-button.view-btn {
+        background: #1d4ed8;
+        color: white;
+        border-radius: 3px;
+        padding: 2px 6px;
+        font-size: 0.8rem;
+        margin-left: 5px;
+    }
+
+    .filepond--file-action-button.view-btn:hover {
+        background: #2563eb;
+    }
+
+    /* Estilos para hacer clickeable el área del archivo */
+    .filepond--file {
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .filepond--file:hover {
+        background-color: rgba(29, 78, 216, 0.1);
+    }
+
+    /* Indicador visual de que es clickeable */
+    .filepond--file::after {
+        content: "Click para ver";
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: rgba(29, 78, 216, 0.8);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 0.7rem;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    .filepond--file:hover::after {
+        opacity: 1;
+    }
+</style>
+
+<!---------->
+<!-- HEAD -->
+<!---------->

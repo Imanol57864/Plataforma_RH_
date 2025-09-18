@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+
+<head>
+    <!-- Global Headers -->
+    <%- include('./partials/globalHeaders.ejs') %>
+
+        <!-- CSS personalizado -->
+        <link rel="stylesheet" href="<%- NGINX_TAG %>/css/partials/global.css">
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'light-blue': '#4a90e2',
+                            'white-custom': '#ebebec',
+                            'cyan-custom': '#87c1d3',
+                            'dark-green': '#016e76',
+                            'black-custom': '#292f38',
+                            'light-green': '#4a9ca8', // Suggested addition for better contrast
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <style>
+            html,
+            body {
+                background: linear-gradient(160deg, var(--white));
+                height: 100%;
+                margin: 0;
+            }
+
+            @keyframes gradientShift {
+                0% {
+                    background-position: 0% 50%;
+                }
+
+                50% {
+                    background-position: 100% 50%;
+                }
+
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            .text-shadow {
+                text-shadow: 2px 4px 6px rgba(41, 47, 56, 0.3);
+            }
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(0px);
+                }
+
+                50% {
+                    transform: translateY(-15px);
+                }
+            }
+
+            .float-animation {
+                animation: float 8s ease-in-out infinite;
+            }
+
+            @keyframes pulse-ring {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.6);
+                }
+
+                70% {
+                    box-shadow: 0 0 0 15px rgba(74, 144, 226, 0);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(74, 144, 226, 0);
+                }
+            }
+        </style>
+</head>
+
+<body id="content">
+    <!-- Navigation Bar -->
+    <%- include('./partials/navbar.ejs') %>
+
+        <!-- Side Bar -->
+        <%- include('./partials/sidebar.ejs') %>
+
+            <!-- Main Content -->
+            <div class="min-h-screen flex items-center justify-center relative z-10 pt-16">
+                <!-- Hero Section -->
+                <div class="max-w-7xl mx-auto text-center w-full" x-data="{ loaded: false }"
+                    x-init="setTimeout(() => loaded = true, 300)">
+
+                    <!-- Welcome Title -->
+                    <div class="mb-16 transform transition-all duration-1000"
+                        :class="loaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
+                        <p class="text-lg md:text-xl lg:text-2xl font-light mb-8 max-w-4xl mx-auto opacity-90"
+                            style="color: var(--black);">
+                            Bienvenido a la Plataforma de Gestión de Recursos Humanos
+                        </p>
+
+                        <!-- Animated Subtitle -->
+                        <div class="flex items-center justify-center space-x-3 opacity-80" style="color: var(--black);">
+                            <div class="w-16 h-px bg-gradient-to-r from-transparent via-current to-transparent"></div>
+                            <span class="text-sm uppercase tracking-widest font-medium">Ingeniería Eléctrica
+                                Especializada</span>
+                            <div class="w-16 h-px bg-gradient-to-r from-transparent via-current to-transparent"></div>
+                        </div>
+                    </div>
+
+                    <!-- Logo Container -->
+                    <div class="mb-16 transform transition-all duration-1000 delay-500 pt-8"
+                        :class="loaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
+                        <div class="relative inline-block">
+                            <!-- Logo Card -->
+                            <div class="rounded-3xl p-8 lg:p-12 relative z-10 float-animation"
+                                style="background: radial-gradient(circle, var(--white) 0%, var(--white) 0%, var(--glass-black) 100%);">
+                                <img src="<%- NGINX_TAG %>/img/SIVOC_LOGO.png"
+                                    class="w-64 lg:w-80 h-auto mx-auto drop-shadow-2xl" alt="Logo SIVOC" x-show="loaded"
+                                    x-transition:enter="transition ease-out duration-1000"
+                                    x-transition:enter-start="opacity-0 scale-50"
+                                    x-transition:enter-end="opacity-100 scale-100">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+</body>
+
+</html>

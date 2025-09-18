@@ -1,0 +1,13 @@
+# .gitignore
+.env
+database/
+pgdata/
+src/node_modules
+*.pid
+*.sock
+src/docs
+src/.env
+
+# uploads
+src/uploads/archivo_permiso/*
+!src/uploads/archivo_permiso/.gitkeep

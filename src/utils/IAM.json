@@ -1,0 +1,24 @@
+{
+    "verTableroPermisos": {
+        "COLABORADOR": {
+            "cargarTusPermisos": true
+        },
+        "JEFEINMEDIATO": {
+            "cargarPermisosEquipo": true,
+            "cargarTusPermisos": true
+        },
+        "PERSONALRRHH": {
+            "cargarTodosLosPermisos": true,
+            "cargarTusPermisos": true
+        },
+        "DIRECCION": {
+            "cargarTodosLosPermisos": true,
+            "cargarTusPermisos": true
+        }
+    },
+    "verTableroActivados": {
+        "JEFEINMEDIATO": true,
+        "PERSONALRRHH": true,
+        "DIRECCION": true
+    }
+}

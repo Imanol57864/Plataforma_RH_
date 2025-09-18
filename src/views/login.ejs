@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+
+<head>
+    <!-- Global Headers -->
+    <%- include('./partials/globalHeaders.ejs') %>
+
+    <!-- Login settings -->
+    <script src="<%- NGINX_TAG %>/js/login/login.js"></script>
+    <style>
+        .icon-envelope::before {
+            content: "✉";
+            /* cite: 2 */
+        }
+
+        .icon-lock::before {
+            content: "🔒";
+            /* cite: 3 */
+        }
+
+        /* Gradient background */
+        .bg-gradient-blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            /* cite: 4 */
+        }
+
+        /* Smooth animations */
+        .login-card {
+            animation: fadeInUp 0.6s ease-out;
+            /* cite: 5 */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                /* cite: 6 */
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                /* cite: 7 */
+                transform: translateY(0);
+            }
+        }
+
+        /* Input focus states */
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            /* cite: 8 */
+        }
+    </style>
+</head>
+
+<body class="h-full bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8" x-data="logInLogic()" x-init="init()">
+            <div class="text-center">
+                <img src="<%- NGINX_TAG %>/img/SIVOC_LOGO.png" alt="SIVOC Logo" class="mx-auto h-16 w-auto">
+            </div>
+
+            <div class="login-card bg-white rounded-lg shadow-xl p-8">
+                <div class="mb-6">
+                    <h2 class="text-center text-xl font-semibold text-gray-900">
+                        Inicia sesión en tu cuenta </h2>
+                </div>
+
+                <form class="space-y-6" @submit.prevent="logIn()">
+
+                    <div x-show="errorMessage" x-transition
+                        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-sm"
+                        role="alert">
+                        <strong class="font-bold">Mensaje: </strong> <span x-text="errorMessage"></span>
+                    </div>
+
+                    <div> <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Correo electrónico
+                        </label>
+                        <div class="relative"> <input id="email" name="email" x-model="email"
+                                maxlength="54"
+                                class="input-focus appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                                placeholder="usuario@sivoc.com">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="icon-envelope text-blue-500 text-lg"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div> <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                            Contraseña
+                        </label>
+                        <div class="relative"> <input id="password" name="password"
+                                :type="showPassword ? 'text' : 'password'" x-model="password" maxlength="33"
+                                class="input-focus appearance-none relative block w-full px-3 py-3 pl-10 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                                placeholder="contraseña">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="icon-lock text-blue-500 text-lg"></span>
+                            </div>
+                            <button type="button" @click="showPassword = !showPassword"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <span x-text="showPassword ? '👁️‍🗨️' : '👁️‍🗨️'"
+                                    class="text-gray-400 hover:text-gray-600"></span> </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input id="remember" name="remember" type="checkbox" x-model="remember"
+                                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <label for="remember" class="ml-2 block text-sm text-gray-700">
+                                Recordarme </label>
+                        </div>
+                        <!-- Toggle 
+                        <div class="text-sm">
+                            <a href="#" class="font-medium text-blue-600 hover:text-blue-500 transition-colors">
+                                ¿Olvidaste tu contraseña? </a>
+                        </div>
+                        -->
+                    </div>
+
+                    <div> <button type="submit" :disabled="isLoading"
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-blue hover:from-blue-600 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105">
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                <span x-show="!isLoading" class="text-white"></span>
+                                <div x-show="isLoading"
+                                    class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                            </span>
+                            <span x-text="isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'"></span> </button>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="text-center text-xs text-gray-500">
+                <p>&copy; 2025 SIVOC. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

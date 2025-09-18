@@ -1,0 +1,108 @@
+{
+    "DIRECCION": {
+        "equipo": {
+            "verTableroEquipos": true,
+            "borrarEquipo": true, 
+            "crearEquipo": true,            "verTableroPermisos": {
+                
+            },
+            "editarEquipo": true
+        },
+        "usuario": {
+            "verTableroActivados": true,
+            "añadirUsuarios": true,
+            "verTableroDesactivados": true,
+            "descargarPdf": true,
+            "descargarExcel": true,
+            "editarUsuarios": true
+        },
+        "permiso": {
+            "verTableroPermisos": true,
+            "verArchivos": true,
+            "cambiarEstado": true,
+            "verificarPermiso": true,
+            "descargarPdf": true,
+            "descargarExcel": true,
+            "crearPermiso": false,
+            "enviarPermiso": false,
+            "editarPermiso": false
+        },
+        "vacacion": {},
+        "curso": {},
+        "impartir_curso": {}
+    },
+    "JEFEINMEDIATO": {
+        "equipo": {
+            "verTableroEquipos": true,
+            "borrarEquipo": true,
+            "crearEquipo": true,
+            "editarEquipo": true
+        },
+        "usuario": {
+            "verTableroActivados": true,
+            "añadirUsuarios": true,
+            "verTableroDesactivados": true,
+            "descargarPdf": true,
+            "descargarExcel": true,
+            "editarUsuarios": true
+        },
+        "permiso": {
+
+            "verArchivos": true,
+            "cambiarEstado": true,
+            "verificarPermiso": true,
+            "descargarPdf": true,
+            "descargarExcel": true
+        },
+        "vacacion": {},
+        "curso": {},
+        "impartir_curso": {}
+    },
+    "PERSONALRRHH": {
+        "equipo": {
+            "verTableroEquipos": true,
+            "borrarEquipo": true,
+            "crearEquipo": true,
+            "editarEquipo": true
+        },
+        "usuario": {
+            "verTableroActivados": true,
+            "añadirUsuarios": true,
+            "verTableroDesactivados": true,
+            "descargarPdf": true,
+            "descargarExcel": true,
+            "editarUsuarios": true
+        },
+        "permiso": {
+            "verTableroPermisos": true,
+            "verArchivos": true,
+            "cambiarEstado": true,
+            "verificarPermiso": true,
+            "descargarPdf": true,
+            "descargarExcel": true
+        },
+        "vacacion": {},
+        "curso": {},
+        "impartir_curso": {}
+    },
+    "COLABORADOR": {
+        "equipo": {},
+        "usuario": {},
+        "permiso": {
+            "crearPermiso": true,
+            "enviarPermiso": true,
+            "editarPermiso": true
+        },
+        "vacacion": {},
+        "curso": {},
+        "impartir_curso": {},
+        "usuarios": {},
+        "permisos": {
+            "crearPermiso": false,
+            "enviarPermiso": false,
+            "editarPermiso": false
+        },
+        "vacaciones": {},
+        "cursos": {}
+    }
+}

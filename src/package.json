@@ -1,0 +1,103 @@
+{
+  "name": "plataforma_rh",
+  "version": "0.2.0",
+  "description": "SIVOC es una empresa de servicio dedicada a la administración y puesta en marcha, construcción, venta y comercialización para sistemas de: generación, transmisión, transformación y distribución de energía eléctrica, energías renovables, comunicaciones y telecomunicaciones para baja, media, alta y extra alta tensión.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npx nodemon server.js",
+    "lint": "eslint . --config eslint.config.mjs",
+    "gencruiser": "depcruise . --output-type dot > docs/deps.dot",
+    "genchart": "dot -Tsvg -Grankdir=LR -Gnodesep=1 -Granksep=2 docs/deps.dot -o docs/deps.svg"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "canvg": "^4.0.3",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "dompurify": "^3.2.6",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "exceljs": "^4.4.0",
+    "express-rate-limit": "^8.0.1",
+    "fs-extra": "^11.3.0",
+    "html2canvas": "^1.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "jspdf": "^3.0.1",
+    "multer": "^1.4.5-lts.1",
+    "path": "^0.12.7",
+    "pdfkit": "^0.16.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@mermaid-js/mermaid-cli": "^11.9.0",
+    "@release-it/conventional-changelog": "^10.0.1",
+    "@types/express": "^5.0.3",
+    "@types/multer": "^1.4.13",
+    "autoprefixer": "^10.4.21",
+    "conventional-changelog-cli": "^5.0.0",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "dependency-cruiser": "^17.0.0",
+    "eslint": "^9.28.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsdoc": "^51.0.0",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-unicorn": "^60.0.0",
+    "nodemon": "^3.1.9",
+    "postcss": "^8.5.6",
+    "release-it": "^19.0.3",
+    "tailwindcss": "^4.1.11"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "../CHANGELOG.md",
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Added"
+            },
+            {
+              "type": "feature",
+              "section": "Added"
+            },
+            {
+              "type": "fix",
+              "section": "Fixed"
+            },
+            {
+              "type": "refactor",
+              "section": "Changed"
+            },
+            {
+              "type": "testing",
+              "section": "Security"
+            },
+            {
+              "type": "test",
+              "section": "Security"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
